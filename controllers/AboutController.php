@@ -6,6 +6,7 @@ class AboutController {
     
     function indexAction($smarty) {
         $smarty->assign('pageTitleRu', 'Об Авторе');
+        echo "string";
         $smarty->assign('pageTitleEn', 'About Author');
         
         loadTemplate($smarty, 'header');
