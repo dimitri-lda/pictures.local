@@ -23,7 +23,7 @@ class AccountController {
 
                 }
                 if ($pageId == 3) {
-                    $rsPictures = $picturesModel->getHiddenPictures();
+                    $rsPictures = $picturesModel->getHiddenPictures($mysqli);
                     $categoryName = 'Скрытые картины';
                     $categoryId = NULL;
                     

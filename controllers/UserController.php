@@ -47,7 +47,7 @@ class UserController {
         $pwd = isset($_POST['pwd']) ? $_POST['pwd'] : NULL;
         $pwd = trim($pwd);
 
-        $UserData = $usersModel->loginUser($email, $pwd);
+        $UserData = $usersModel->loginUser($mysqli, $email, $pwd);
         if ($UserData['success']) {
             $UserData = $UserData[0];
             $resData['message'] = 'Вы вошли успешно';

@@ -8,13 +8,11 @@
  */
 class PicturesModel {
 
-    function getLastPictures($limit = null) {
+    function getLastPictures($mysqli, $limit = null) {
         $sql = "SELECT * 
              FROM `pictures` 
              WHERE type = 0 and status <> 0 
              ORDER BY `id` DESC";
-
-        require '../config/db.php';
 
         if ($limit) {
             $sql .= " LIMIT {$limit}";
@@ -31,13 +29,11 @@ class PicturesModel {
      * @param integer $categoryId category ID
      * @return array of products
      */
-    function getPicturesByCat($categoryId) {
+    function getPicturesByCat($mysqli, $categoryId) {
         $categoryId = intval($categoryId);
         $sql = "SELECT * 
          FROM `pictures`   
          WHERE `category` = '{$categoryId}' AND type = 0 and status <> 0";
-
-        require '../config/db.php';
 
         $rs = $mysqli->query($sql);
         $mysqli->close();
@@ -45,14 +41,12 @@ class PicturesModel {
         return createSmartyRsArray($rs);
     }
     
-    function getFragmentsByPicture($typeId) {
+    function getFragmentsByPicture($mysqli, $typeId) {
         $typeId = intval($typeId);
         $sql = "SELECT * 
          FROM `pictures`   
          WHERE `type` = '{$typeId}' and status <> 0";
-
-        require '../config/db.php';
-
+         
         $rs = $mysqli->query($sql);
         $mysqli->close();
 
@@ -65,13 +59,11 @@ class PicturesModel {
      * @param type $itemId product ID
      * @return array - string of products
      */
-    function getPicturesById($itemId) {
+    function getPicturesById($mysqli, $itemId) {
         $itemId = intval($itemId);
         $sql = "SELECT * 
          FROM `pictures`   
          WHERE `id` = '{$itemId}'";
-
-        require '../config/db.php';
 
         $rs = $mysqli->query($sql);
         $mysqli->close();
@@ -79,13 +71,11 @@ class PicturesModel {
         return $rs->fetch_assoc();
     }
     
-    function getHiddenPictures($limit = null) {
+    function getHiddenPictures($mysqli, $limit = null) {
         $sql = "SELECT * 
              FROM `pictures` 
              WHERE type = 0 and status = 0 
              ORDER BY `id` DESC";
-
-        require '../config/db.php';
 
         if ($limit) {
             $sql .= " LIMIT {$limit}";
@@ -96,20 +86,16 @@ class PicturesModel {
         return createSmartyRsArray($rs);
     }
     
-    function hidePicture($id) {
+    function hidePicture($mysqli, $id) {
         $sql = "UPDATE `pictures` SET `status` = '0' WHERE `pictures`.`id` = {$id};";
-
-        require '../config/db.php';
 
         $mysqli->query($sql);
         $mysqli->close();
         return true;
     }
     
-    function showPicture($id) {
+    function showPicture($mysqli, $id) {
         $sql = "UPDATE `pictures` SET `status` = '1' WHERE `pictures`.`id` = {$id};";
-
-        require '../config/db.php';
 
         $mysqli->query($sql);
         $mysqli->close();

@@ -19,8 +19,8 @@ class PictureController {
         $itemId = isset($_GET['id']) ? $_GET['id'] : NULL;
         if ($itemId == NULL) exit();
 
-        $rsPicture = $picturesModel->getPicturesById($itemId);
-        $rsFragments = $picturesModel->getFragmentsByPicture($itemId);
+        $rsPicture = $picturesModel->getPicturesById($mysqli, $itemId);
+        $rsFragments = $picturesModel->getFragmentsByPicture($mysqli, $itemId);
         if (count($rsFragments) > 0) {
             $rsFragmentsLast = $rsFragments[count($rsFragments)-1]['id'];
         } else {
@@ -69,7 +69,7 @@ class PictureController {
         $itemId = isset($_POST['id']) ? $_POST['id'] : NULL;
         if ($itemId == NULL) exit();
         
-        $picturesModel->hidePicture($itemId);
+        $picturesModel->hidePicture($mysqli, $itemId);
     }
     
     function showAction() {
@@ -77,7 +77,7 @@ class PictureController {
         $itemId = isset($_POST['id']) ? $_POST['id'] : NULL;
         if ($itemId == NULL) exit();
         
-        $picturesModel->showPicture($itemId);
+        $picturesModel->showPicture($mysqli, $itemId);
     }
 
 }

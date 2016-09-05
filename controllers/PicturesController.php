@@ -12,9 +12,9 @@ class PicturesController {
         $catId = isset($_GET['id']) ? $_GET['id'] : NULL;
 
         if ($catId != NULL) {
-            $rsPictures = $picturesModel->getPicturesByCat($catId);
+            $rsPictures = $picturesModel->getPicturesByCat($mysqli, $catId);
         } else {
-            $rsPictures = $picturesModel->getLastPictures();
+            $rsPictures = $picturesModel->getLastPictures($mysqli);
         }
         
         switch ($catId) {
