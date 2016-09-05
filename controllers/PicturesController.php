@@ -6,15 +6,21 @@
 include_once '../models/PicturesModel.php';
 
 class PicturesController {
-
+    
+    private $mysqli;
+    
+    function __construct($mysqli) {
+        $this->mysqli = $mysqli;
+    }
+    
     function indexAction($smarty) {
         $picturesModel = new PicturesModel();
         $catId = isset($_GET['id']) ? $_GET['id'] : NULL;
 
         if ($catId != NULL) {
-            $rsPictures = $picturesModel->getPicturesByCat($mysqli, $catId);
+            $rsPictures = $picturesModel->getPicturesByCat($this->mysqli, $catId);
         } else {
-            $rsPictures = $picturesModel->getLastPictures($mysqli);
+            $rsPictures = $picturesModel->getLastPictures($this->mysqli);
         }
         
         switch ($catId) {

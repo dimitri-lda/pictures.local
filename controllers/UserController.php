@@ -6,7 +6,13 @@
 include_once '../models/UsersModel.php';
 
 class UserController {
-
+    
+    private $mysqli;
+    
+    function __construct($mysqli) {
+        $this->mysqli = $mysqli;
+    }
+    
     function logAction($smarty, $error = null) {
         $smarty->assign('pageTitleRu', 'Авторизация');
         $smarty->assign('pageTitleEn', 'Authorization');
@@ -47,7 +53,7 @@ class UserController {
         $pwd = isset($_POST['pwd']) ? $_POST['pwd'] : NULL;
         $pwd = trim($pwd);
 
-        $UserData = $usersModel->loginUser($mysqli, $email, $pwd);
+        $UserData = $usersModel->loginUser($this->mysqli, $email, $pwd);
         if ($UserData['success']) {
             $UserData = $UserData[0];
             $resData['message'] = 'Вы вошли успешно';

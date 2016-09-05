@@ -1,10 +1,6 @@
 <?php
 
-/**
- * Controller of the product page (/product/1)
- */
-// modules connection
-    include_once '../models/PicturesModel.php';
+include_once '../models/PicturesModel.php';
 
 /**
  * Product page formation
@@ -13,14 +9,20 @@
  */
 class PictureController {
 
+    private $mysqli;
+    
+    function __construct($mysqli) {
+        $this->mysqli = $mysqli;
+    }
+    
     function indexAction($smarty) {
         $picturesModel = new PicturesModel();
         
         $itemId = isset($_GET['id']) ? $_GET['id'] : NULL;
         if ($itemId == NULL) exit();
 
-        $rsPicture = $picturesModel->getPicturesById($mysqli, $itemId);
-        $rsFragments = $picturesModel->getFragmentsByPicture($mysqli, $itemId);
+        $rsPicture = $picturesModel->getPicturesById($this->mysqli, $itemId);
+        $rsFragments = $picturesModel->getFragmentsByPicture($this->mysqli, $itemId);
         if (count($rsFragments) > 0) {
             $rsFragmentsLast = $rsFragments[count($rsFragments)-1]['id'];
         } else {

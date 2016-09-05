@@ -10,12 +10,12 @@
  * @param type $actionName name of the function (page handling)
  */
 
-function loadPage($smarty, $controllerName, $actionName = 'index') {
+function loadPage($smarty, $mysqli, $controllerName, $actionName = 'index') {
     
     include_once PathPrefix . $controllerName . PathPostfix;
     
     $classname = $controllerName . "Controller";
-    $class = new $classname();
+    $class = new $classname($mysqli);
     $function = $actionName . 'Action';
     $class->$function($smarty);
 }

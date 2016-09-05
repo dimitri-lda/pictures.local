@@ -17,4 +17,4 @@ if (isset($_SESSION['user'])) {
     $smarty->assign('UserStatus', $_SESSION['user']['role']); 
 }
 
-loadPage($smarty, $controllerName, $actionName);
+loadPage($smarty, $mysqli, $controllerName, $actionName);

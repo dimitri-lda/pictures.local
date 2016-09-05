@@ -4,6 +4,12 @@ include_once '../models/PicturesModel.php';
 
 class AccountController {
     
+    private $mysqli;
+    
+    function __construct($mysqli) {
+        $this->mysqli = $mysqli;
+    }
+    
     function indexAction($smarty) {
         $picturesModel = new PicturesModel();
         $pageId = isset($_GET['id']) ? $_GET['id'] : NULL;
@@ -23,7 +29,7 @@ class AccountController {
 
                 }
                 if ($pageId == 3) {
-                    $rsPictures = $picturesModel->getHiddenPictures($mysqli);
+                    $rsPictures = $picturesModel->getHiddenPictures($this->mysqli);
                     $categoryName = 'Скрытые картины';
                     $categoryId = NULL;
                     

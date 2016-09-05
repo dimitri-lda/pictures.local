@@ -1,15 +1,13 @@
 <?php
-/**
- * Controller of the main page (index.php)
- */
-
-/**
- * Main page formation (index.php)
- * 
- * @param type $smarty template engine
- */
 
 class IndexController {
+    
+    private $mysqli;
+    
+    function __construct($mysqli) {
+        $this->mysqli = $mysqli;
+    }
+    
     function indexAction($smarty) {
         
         $smarty->assign('pageTitleRu', 'Artphilexpress. Главная страница.');
